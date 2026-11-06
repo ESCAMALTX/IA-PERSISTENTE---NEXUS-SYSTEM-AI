@@ -1,0 +1,103 @@
+========================================================
+  NEXUS SYSTEM AI  -  COMO USARLO
+========================================================
+
+QUE ES
+Un asistente de IA que vigila tu PC con Windows, te avisa
+cuando algo va mal, te lo explica y recuerda todo lo que
+hablas con el. La clave de DeepSeek ya esta puesta.
+
+
+------------------------------------------------------
+1) ABRIR EL PANEL (lo normal, uso diario)
+------------------------------------------------------
+
+  Haz doble clic en:   start.bat
+
+  Se abre una ventana negra. NO la cierres.
+  Luego abre tu navegador en:
+
+      http://127.0.0.1:8000
+
+  Para apagarlo: cierra la ventana negra o pulsa Ctrl+C.
+
+
+------------------------------------------------------
+2) QUE PUEDES HACER EN EL PANEL
+------------------------------------------------------
+
+  Panel        -> CPU, RAM, disco en vivo + procesos pesados
+  Conversacion -> habla con la IA (recuerda el historial)
+  Logs en vivo -> todo lo que pasa, en tiempo real
+  Memoria      -> conversaciones guardadas (puedes borrarlas)
+  Incidentes   -> historial de problemas + su diagnostico
+
+  Boton "Analizar con IA" -> la IA revisa el equipo ahora
+  y te dice que le pasa y que hacer.
+
+
+------------------------------------------------------
+3) DEJARLO SIEMPRE ENCENDIDO EN SEGUNDO PLANO
+------------------------------------------------------
+
+  Haz doble clic en:   service.bat
+
+  Eso es todo. Arranca solo cada vez que enciendas el PC,
+  sin ventanas. El panel sigue en http://127.0.0.1:8000
+
+  Otros comandos (abre cmd en esta carpeta y escribe):
+
+      service.bat status      -> ver si esta corriendo
+      service.bat stop        -> apagarlo
+      service.bat start       -> encenderlo
+      service.bat uninstall   -> quitarlo del arranque
+
+
+------------------------------------------------------
+4) AVISOS AUTOMATICOS
+------------------------------------------------------
+
+  Te crea una alerta solo si pasa de:
+
+      CPU    85 %      RAM   85 %      Disco  90 %
+
+  Cuando se normaliza, la alerta se cierra sola.
+  No te llena de avisos repetidos.
+
+  Para cambiar esos numeros: abre el archivo .env
+  y edita CPU_ALERT_THRESHOLD, RAM_ALERT_THRESHOLD,
+  DISK_ALERT_THRESHOLD. Despues reinicia.
+
+
+------------------------------------------------------
+5) SI ALGO NO FUNCIONA
+------------------------------------------------------
+
+  - El navegador no abre la pagina:
+      revisa que la ventana negra siga abierta.
+
+  - En segundo plano no arranca:
+      abre  data\nexus-stdout.log  y mira el error.
+
+  - La IA no contesta:
+      revisa que DEEPSEEK_API_KEY en .env sea correcta.
+
+  - Para empezar de cero (borra todo el historial):
+      cierra el programa y borra la carpeta  data
+
+
+------------------------------------------------------
+6) ARCHIVOS
+------------------------------------------------------
+
+  start.bat      -> abrir el panel (uso normal)
+  service.bat    -> segundo plano / automatico
+  .env           -> tu clave y los umbrales de aviso
+  data\          -> tu memoria (base de datos SQLite)
+  README.md      -> documentacion tecnica completa
+
+========================================================
+  RESUMEN RAPIDO
+  Doble clic en service.bat  ->  listo, para siempre
+  Navegador:  http://127.0.0.1:8000
+========================================================

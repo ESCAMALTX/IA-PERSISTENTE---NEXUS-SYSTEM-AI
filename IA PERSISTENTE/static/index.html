@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS SYSTEM AI</title>
+
+<link rel="icon" href="/static/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/static/favicon-192.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<meta name="theme-color" content="#4a7fb5">
+<meta name="description" content="NEXUS SYSTEM AI — supervisión inteligente de tu equipo con IA.">
+
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">◉</div>
+      <div>
+        <h1>NEXUS</h1>
+        <span class="subtitle">SYSTEM AI</span>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item active" data-view="panel">Panel</button>
+      <button class="nav-item" data-view="chat">Conversación</button>
+      <button class="nav-item" data-view="logs">Logs en vivo</button>
+      <button class="nav-item" data-view="memory">Memoria</button>
+      <button class="nav-item" data-view="incidents">Incidentes</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="agent-list" id="agentList"></div>
+      <div class="conn" id="connState"><span class="dot"></span> conectando…</div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ============ PANEL ============ -->
+    <section class="view active" id="view-panel">
+      <header class="view-header">
+        <h2>Estado general</h2>
+        <div class="header-actions">
+          <button class="btn" id="btnAnalyze">Analizar con IA</button>
+          <span class="badge" id="overallBadge">—</span>
+        </div>
+      </header>
+
+      <div class="cards">
+        <article class="card gauge-card">
+          <header><span>CPU</span><strong id="cpuVal">0%</strong></header>
+          <div class="gauge"><div class="gauge-fill" id="cpuBar"></div></div>
+          <canvas class="spark" id="cpuSpark" height="46"></canvas>
+        </article>
+        <article class="card gauge-card">
+          <header><span>RAM</span><strong id="ramVal">0%</strong></header>
+          <div class="gauge"><div class="gauge-fill" id="ramBar"></div></div>
+          <canvas class="spark" id="ramSpark" height="46"></canvas>
+          <footer id="ramDetail" class="muted">—</footer>
+        </article>
+        <article class="card gauge-card">
+          <header><span>Disco C:</span><strong id="diskVal">0%</strong></header>
+          <div class="gauge"><div class="gauge-fill" id="diskBar"></div></div>
+          <footer id="diskDetail" class="muted">—</footer>
+        </article>
+        <article class="card info-card">
+          <header><span>Equipo</span></header>
+          <ul class="kv">
+            <li><span>Procesos</span><strong id="kProc">—</strong></li>
+            <li><span>Núcleos</span><strong id="kCores">—</strong></li>
+            <li><span>Encendido</span><strong id="kUptime">—</strong></li>
+            <li><span>Red ↓/↑</span><strong id="kNet">—</strong></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <header><span>Procesos con más carga</span></header>
+          <table class="table" id="procTable">
+            <thead><tr><th>Proceso</th><th>PID</th><th>CPU</th><th>RAM</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </article>
+        <article class="card">
+          <header><span>Alertas recientes</span></header>
+          <div class="alert-list" id="alertList"><p class="muted">Sin alertas.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ CHAT ============ -->
+    <section class="view" id="view-chat">
+      <header class="view-header">
+        <h2>Conversación con NEXUS</h2>
+        <div class="header-actions">
+          <select id="convSelect" class="select"></select>
+          <button class="btn ghost" id="btnNewConv">Nueva</button>
+        </div>
+      </header>
+      <div class="chat-window">
+        <div class="messages" id="messages"></div>
+        <form class="composer" id="chatForm">
+          <textarea id="chatInput" placeholder="Escribe a NEXUS… (Enter para enviar, Shift+Enter para salto de línea)" rows="2"></textarea>
+          <button class="btn primary" type="submit" id="btnSend">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ LOGS ============ -->
+    <section class="view" id="view-logs">
+      <header class="view-header">
+        <h2>Monitor de logs</h2>
+        <div class="header-actions">
+          <select id="logFilter" class="select">
+            <option value="">Todos los niveles</option>
+            <option value="INFO">INFO</option>
+            <option value="WARNING">WARNING</option>
+            <option value="ERROR">ERROR</option>
+          </select>
+          <button class="btn ghost" id="btnClearLogs">Limpiar vista</button>
+        </div>
+      </header>
+      <div class="terminal" id="logBox"></div>
+    </section>
+
+    <!-- ============ MEMORIA ============ -->
+    <section class="view" id="view-memory">
+      <header class="view-header"><h2>Memoria almacenada</h2></header>
+      <div class="cards">
+        <article class="card stat"><span>Conversaciones</span><strong id="mConv">0</strong></article>
+        <article class="card stat"><span>Mensajes</span><strong id="mMsg">0</strong></article>
+        <article class="card stat"><span>Incidentes</span><strong id="mInc">0</strong></article>
+        <article class="card stat"><span>Abiertos</span><strong id="mOpen">0</strong></article>
+        <article class="card stat"><span>Logs</span><strong id="mLogs">0</strong></article>
+      </div>
+      <article class="card">
+        <header><span>Historial de conversaciones</span></header>
+        <table class="table" id="convTable">
+          <thead><tr><th>Título</th><th>Mensajes</th><th>Creada</th><th>Actualizada</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </article>
+    </section>
+
+    <!-- ============ INCIDENTES ============ -->
+    <section class="view" id="view-incidents">
+      <header class="view-header"><h2>Historial de incidentes</h2></header>
+      <div class="incident-list" id="incidentList"><p class="muted">Sin incidentes registrados.</p></div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

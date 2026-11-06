@@ -1,0 +1,41 @@
+NEXUS SYSTEM AI
+
+MVP funcional
+Primera versión ejecutable y demostrable
+
+- IA conectada a DeepSeek.
+- Memoria persistente en SQLite.
+- Monitoreo de CPU, RAM y disco.
+- Logs en tiempo real.
+- Diagnóstico inteligente.
+- Dashboard web.
+- Historial de incidentes.
+- Servicio preparado para ejecutarse en segundo plano.
+
+
+Python: funcionamiento principal.
+DeepSeek API: inteligencia.
+SQLite: memoria persistente.
+FastAPI: backend.
+psutil: monitoreo del computador.
+WebSockets: logs en vivo.
+HTML, CSS y JavaScript: dashboard.
+
+Un panel con:
+- Estado general de la IA.
+- Estado de los agentes.
+- CPU, RAM y almacenamiento.
+- Conversación con el administrador.
+- Monitor de logs.
+- Memoria almacenada.
+- Alertas y diagnósticos.
+
+construir una aplicación que pueda:
+- Conversar con DeepSeek.
+- Recordar conversaciones después de cerrar el programa.
+- Supervisar el computador Windows.
+- Detectar consumo elevado de CPU y RAM.
+- Registrar eventos y errores automáticamente.
+- Mostrar logs en vivo.
+- Analizar problemas del computador mediante IA.
+- Mantener un historial de incidentes.

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b8fc4"/>
+      <stop offset="1" stop-color="#3d6d9d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- placa redondeada -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)"/>
+
+  <!-- la "N" de NEXUS, dibujada como trazo angular -->
+  <path d="M17 47 V17 L47 47 V17"
+        fill="none" stroke="#ffffff" stroke-width="6.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- nodo de monitorizacion: el punto que "vigila" -->
+  <circle cx="47" cy="17" r="5.2" fill="#ffffff"/>
+  <circle cx="47" cy="17" r="2.1" fill="#3d6d9d"/>
+</svg>

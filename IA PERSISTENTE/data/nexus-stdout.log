@@ -1,0 +1,40 @@
+==========================================================
+  NEXUS SYSTEM AI  -  panel: http://127.0.0.1:8000
+==========================================================
+INFO:     Started server process [13180]
+INFO:     Waiting for application startup.
+14:50:39 | INFO    | [NEXUS] Sistema iniciado
+14:50:39 | INFO    | [NEXUS] DeepSeek configurado (modelo deepseek-chat)
+14:50:39 | INFO    | [MONITOR] Monitor iniciado (intervalo 5.0s)
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:61735 - "WebSocket /ws" [accepted]
+INFO:     connection open
+14:50:48 | INFO    | [ALERTA] [critical] RAM al 97.3% (5.77/5.93 GB)
+INFO:     127.0.0.1:52876 - "WebSocket /ws" [accepted]
+INFO:     connection open
+14:50:52 | INFO    | [IA] Diagnóstico generado para el incidente #7
+14:50:54 | INFO    | [ALERTA] [warning] CPU al 87.1%
+14:50:59 | INFO    | [IA] Diagnóstico generado para el incidente #8
+14:50:59 | INFO    | [ALERTA] Incidente #8 (cpu) resuelto: valores normalizados
+INFO:     127.0.0.1:64104 - "WebSocket /ws" [accepted]
+INFO:     connection open
+14:52:50 | INFO    | [ALERTA] [warning] RAM al 88.0% (5.22/5.93 GB)
+14:52:53 | INFO    | [IA] Diagnóstico generado para el incidente #9
+INFO:     127.0.0.1:58768 - "WebSocket /ws" [accepted]
+INFO:     connection open
+14:55:41 | INFO    | [ALERTA] [warning] CPU al 91.9%
+14:55:45 | INFO    | [IA] Diagnóstico generado para el incidente #10
+==========================================================
+  NEXUS SYSTEM AI  -  panel: http://127.0.0.1:8000
+==========================================================
+INFO:     Started server process [9208]
+INFO:     Waiting for application startup.
+15:07:20 | INFO    | [NEXUS] Sistema iniciado
+15:07:20 | INFO    | [NEXUS] DeepSeek configurado (modelo deepseek-chat)
+15:07:20 | INFO    | [MONITOR] Monitor iniciado (intervalo 5.0s)
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+INFO:     Waiting for application shutdown.
+15:07:21 | INFO    | [NEXUS] Sistema detenido
+INFO:     Application shutdown complete.
