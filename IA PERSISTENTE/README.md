@@ -19,15 +19,36 @@ con DeepSeek, recuerda todo lo hablado y diagnostica problemas de forma automát
 
 ## Instalación
 
+### Opción A — Instalador automático (sin instalar Python)
+
+```bat
+instalar.bat
+```
+
+Descarga un Python portable dentro de `runtime\`, instala pip y las librerías, y
+pide la clave de DeepSeek. No modifica el Python del sistema.
+
+### Opción B — Con el Python del sistema
+
 ```powershell
 cd "C:\Users\PC\Documents\IA PERSISTENTE"
 python -m pip install -r requirements.txt
 Copy-Item .env.example .env        # y edita DEEPSEEK_API_KEY
 ```
 
+### Opción C — Docker
+
+```bash
+docker compose up -d --build
+```
+
+Ver [COMPARTIR.txt](COMPARTIR.txt) para el detalle de cada opción.
+
 Clave de API: <https://platform.deepseek.com/api_keys>
 
 ## Ejecutar
+
+Doble clic en `start.bat`, o:
 
 ```powershell
 python run.py
@@ -103,10 +124,20 @@ events.py           bus de eventos para WebSockets
 logger.py           registro en SQLite + consola + bus
 main.py             app FastAPI (API REST + WebSocket)
 run.py              arranque
+instalar.bat        instalador sin necesidad de Python
 start.bat           ejecutar en primer plano
 service.bat         servicio en segundo plano (instalar/arrancar/parar/estado)
 service.ps1         lógica del servicio (lanzador oculto en el arranque)
-static/             dashboard (index.html, style.css, app.js)
+Dockerfile          imagen autocontenida para Docker
+docker-compose.yml  arranque con Docker
+tools/              generación del icono y ajuste del Python portable
+static/             dashboard (index.html, style.css, app.js, iconos)
+runtime/            Python portable (lo crea instalar.bat)
 data/nexus.db       memoria persistente (se crea sola)
 data/nexus-stdout.log  salida del modo segundo plano (para diagnosticar)
 ```
+
+## Compartir con otro equipo
+
+Ver [COMPARTIR.txt](COMPARTIR.txt). Resumen: **nunca enviar `.env` ni `data\`**
+(contienen tu clave y tu historial). El receptor ejecuta `instalar.bat` una vez.

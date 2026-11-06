@@ -1,0 +1,33 @@
+# NEXUS SYSTEM AI — arranque con Docker.
+#
+#   docker compose up -d --build     arranca (primera vez construye la imagen)
+#   docker compose logs -f           ver la salida
+#   docker compose down              parar
+#
+# La clave se lee del archivo .env de esta carpeta. Si no existe, la app
+# arranca igual: monitoriza el equipo, pero sin IA.
+
+services:
+  nexus:
+    build: .
+    image: nexus-ai:latest
+    container_name: nexus-ai
+    restart: unless-stopped
+    ports:
+      # Solo accesible desde este equipo. Cambia a "8000:8000" para abrirlo a la red.
+      - "127.0.0.1:8000:8000"
+    environment:
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      DEEPSEEK_MODEL: ${DEEPSEEK_MODEL:-deepseek-chat}
+      DEEPSEEK_BASE_URL: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+      CPU_ALERT_THRESHOLD: ${CPU_ALERT_THRESHOLD:-85}
+      RAM_ALERT_THRESHOLD: ${RAM_ALERT_THRESHOLD:-85}
+      DISK_ALERT_THRESHOLD: ${DISK_ALERT_THRESHOLD:-90}
+      MONITOR_INTERVAL: ${MONITOR_INTERVAL:-5}
+      ALERT_COOLDOWN: ${ALERT_COOLDOWN:-120}
+    volumes:
+      # La memoria (SQLite) sobrevive a reinicios y reconstrucciones.
+      - nexus-data:/app/data
+
+volumes:
+  nexus-data:

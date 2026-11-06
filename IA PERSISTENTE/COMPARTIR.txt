@@ -1,0 +1,107 @@
+========================================================
+  NEXUS SYSTEM AI  -  COMPARTIRLO CON OTRO PC
+========================================================
+
+Hay DOS formas. Elige una.
+
+
+========================================================
+  OPCION 1 (RECOMENDADA): INSTALADOR AUTOMATICO
+  No hace falta instalar Python.
+========================================================
+
+QUE HACER EN ESTE PC (el tuyo):
+
+  1. Copia TODA la carpeta a un USB o la nube.
+     EXCLUYE estas dos cosas:
+        - el archivo  .env            (tiene TU clave)
+        - la carpeta   data\          (tiene tu historial)
+
+  2. Pega la carpeta en el otro PC.
+
+QUE HACER EN EL OTRO PC:
+
+  3. Doble clic en:   instalar.bat
+
+     Es una sola vez. El instalador hace todo solo:
+        [1/5] descarga Python (queda dentro de la carpeta)
+        [2/5] lo configura
+        [3/5] instala pip
+        [4/5] instala las librerias
+        [5/5] te pide tu clave de DeepSeek
+
+     Tarda unos minutos. Necesita internet.
+
+  4. Cuando termine, doble clic en:
+        start.bat          para abrirlo
+     o  service.bat        para que arranque solo con Windows
+
+  5. Abre el navegador en:  http://127.0.0.1:8000
+
+
+IMPORTANTE:
+  La clave de DeepSeek es tuya y es personal. Cada uno debe usar
+  la suya (se saca gratis en platform.deepseek.com).
+  Si compartes la tuya, esa persona puede gastar tu saldo.
+
+
+========================================================
+  OPCION 2: DOCKER
+  Ideal si el otro PC es de empresa o ya usa Docker.
+========================================================
+
+En el otro PC solo hace falta tener Docker abierto.
+
+QUE HACER (una sola vez):
+
+  1. Instala Docker Desktop si no lo tiene (es gratuito para uso
+     personal):  https://www.docker.com/products/docker-desktop/
+
+  2. Copia la carpeta (igual: sin .env ni data\) y abre una
+     terminal dentro de ella.
+
+  3. Escribe:
+
+        docker compose up -d --build
+
+  4. Abre el navegador en:  http://127.0.0.1:8000
+
+Para pararlo:      docker compose down
+Para ver la clave: crear un archivo .env con DEEPSEEK_API_KEY=...
+
+Por que es comodo:
+  - Todo (Python y librerias) viaja dentro de la imagen.
+  - Funciona igual en Windows, Mac y Linux.
+  - No ensucia el equipo: un solo comando lo borra.
+
+Nota: Docker NO puede leer los ventiladores ni la temperatura real
+del equipo (por seguridad). La RAM y el disco que muestra son los
+que Docker le permite ver, no siempre los del PC completo.
+Para vigilancia real del PC, usa la OPCION 1.
+
+
+========================================================
+  QUE HACE CADA ARCHIVO
+========================================================
+
+  instalar.bat    prepara todo en un PC nuevo (solo una vez)
+  start.bat       abrir el panel (uso normal)
+  service.bat     que arranque solo con Windows
+  Dockerfile      receta de la imagen Docker
+  docker-compose.yml   configuracion de Docker
+  requirements.txt     lista de librerias que se instalan
+  .env.example    plantilla de configuracion (sin clave)
+  .env            TU configuracion con TU clave  (no compartir)
+  data\           tu memoria e historial         (no compartir)
+  runtime\        el Python portable (se crea al instalar)
+
+
+========================================================
+  COMO SABER QUE FUNCIONA
+========================================================
+
+  Si el panel muestra los porcentajes de CPU, RAM y disco
+  moviendose, y abajo a la izquierda pone "en vivo",
+  esta todo correcto.
+
+========================================================

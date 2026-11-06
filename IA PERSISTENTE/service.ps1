@@ -19,9 +19,18 @@ $ErrorActionPreference = "Stop"
 
 $AppName    = "NexusSystemAI"
 $ProjectDir = $PSScriptRoot
-$PythonExe  = (Get-Command python -ErrorAction Stop).Source
-$Pythonw    = Join-Path (Split-Path $PythonExe) "pythonw.exe"
-if (-not (Test-Path $Pythonw)) { $Pythonw = $PythonExe }
+
+# Preferimos el Python portable instalado por instalar.bat (no requiere Python
+# en el sistema). Si no existe, usamos el del PATH.
+$PortablePy = Join-Path $ProjectDir "runtime\pythonw.exe"
+if (Test-Path $PortablePy) {
+    $Pythonw = $PortablePy
+    $PythonExe = Join-Path $ProjectDir "runtime\python.exe"
+} else {
+    $PythonExe = (Get-Command python -ErrorAction Stop).Source
+    $Pythonw   = Join-Path (Split-Path $PythonExe) "pythonw.exe"
+    if (-not (Test-Path $Pythonw)) { $Pythonw = $PythonExe }
+}
 $RunScript  = Join-Path $ProjectDir "run.py"
 
 $StartupDir = [Environment]::GetFolderPath("Startup")

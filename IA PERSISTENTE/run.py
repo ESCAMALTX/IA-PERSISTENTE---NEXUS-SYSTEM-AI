@@ -3,8 +3,15 @@ from __future__ import annotations
 
 import sys
 import traceback
+from pathlib import Path
 
-import config
+# El Python "embed" de Windows no añade la carpeta del script a sys.path, así que
+# la incluimos a mano para que funcione igual con el runtime portable.
+_APP_DIR = str(Path(__file__).resolve().parent)
+if _APP_DIR not in sys.path:
+    sys.path.insert(0, _APP_DIR)
+
+import config  # noqa: E402
 
 LOG_FILE = config.DATA_DIR / "nexus-stdout.log"
 

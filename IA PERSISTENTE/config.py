@@ -4,14 +4,25 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 BASE_DIR = Path(__file__).resolve().parent
-load_dotenv(BASE_DIR / ".env")
 
-DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "").strip()
-DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com").rstrip("/")
-DEEPSEEK_MODEL = os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
+# python-dotenv es opcional: en Docker las variables llegan por el entorno y la
+# app debe arrancar aunque el paquete no esté instalado.
+try:
+    from dotenv import load_dotenv
+except ImportError:  # pragma: no cover - solo en imágenes sin dotenv
+    pass
+else:
+    load_dotenv(BASE_DIR / ".env", override=False)
+
+
+def _env(name: str, default: str) -> str:
+    return os.getenv(name, default)
+
+
+DEEPSEEK_API_KEY = _env("DEEPSEEK_API_KEY", "").strip()
+DEEPSEEK_BASE_URL = _env("DEEPSEEK_BASE_URL", "https://api.deepseek.com").rstrip("/")
+DEEPSEEK_MODEL = _env("DEEPSEEK_MODEL", "deepseek-chat")
 
 HOST = os.getenv("NEXUS_HOST", "127.0.0.1")
 PORT = int(os.getenv("NEXUS_PORT", "8000"))
